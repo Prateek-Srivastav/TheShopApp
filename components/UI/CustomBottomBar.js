@@ -18,11 +18,11 @@ const CustomBottomBar = (props) => {
   const animStyles = {
     position: "absolute",
     top: 0,
-    left: width / 12,
+    left: width / 20,
     borderRadius: 20,
     elevation: 35,
     bottom: 50,
-    width: width / 6,
+    width: width / 7,
     backgroundColor: Colors.text,
     transform: position.getTranslateTransform(),
   };
@@ -50,13 +50,18 @@ const CustomBottomBar = (props) => {
               //animated position should be 0
               animate(0, route.key);
               break;
-            case "Orders":
-              //animated position is width/3
-              animate(width / 3, route.key);
-              break;
             case "Cart":
               //animated position is width of screen minus width of single tab button
-              animate(width - width / 3, route.key);
+              animate(width / 4, route.key);
+              break;
+            case "Orders":
+              //animated position is width/3
+              animate(width / 2, route.key);
+              break;
+
+            case "Admin":
+              //animated position is width of screen minus width of single tab button
+              animate(width - width / 4, route.key);
               break;
           }
         }}

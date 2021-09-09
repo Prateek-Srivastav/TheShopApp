@@ -6,6 +6,7 @@ import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import MainButton from "../../components/UI/MainButton";
 import CustomHeaderButton from "../../components/UI/HeaderButton";
 import * as cartActions from "../../store/actions/cart";
+import Colors from "../../constants/Colors";
 
 const ProductDetailScreen = (props) => {
   const productId = props.navigation.getParam("productId");
@@ -16,7 +17,7 @@ const ProductDetailScreen = (props) => {
   const dispatch = useDispatch();
 
   return (
-    <ScrollView style={{ backgroundColor: "white" }}>
+    <ScrollView style={{ backgroundColor: Colors.primary }}>
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}

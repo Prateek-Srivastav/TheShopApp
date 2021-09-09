@@ -4,6 +4,7 @@ import Colors from "../../constants/Colors";
 import { useSelector, useDispatch } from "react-redux";
 
 import MainButton from "../../components/UI/MainButton";
+import Card from "../../components/UI/Card";
 import CartItem from "../../components/shop/CartItem";
 import * as cartActions from "../../store/actions/cart";
 import * as ordersActions from "../../store/actions/orders";
@@ -38,7 +39,7 @@ const CartScreen = (props) => {
 
   return (
     <View style={styles.screen}>
-      <View style={styles.summary}>
+      <Card style={styles.summary}>
         <Text style={styles.summaryText}>
           Total:{" "}
           <Text style={styles.amount}>${cartTotalAmount.toFixed(2)}</Text>
@@ -49,7 +50,7 @@ const CartScreen = (props) => {
             dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
           }}
         />
-      </View>
+      </Card>
       <FlatList
         data={cartItems}
         keyExtractor={(item) => item.productId}
@@ -76,17 +77,13 @@ CartScreen.navigationOptions = {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: Colors.primary,
   },
   summary: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     padding: 10,
-    elevation: 3,
-    borderColor: "#ccc",
-    borderRadius: 10,
-    backgroundColor: "white",
     marginTop: 20,
     margin: 15,
     overflow: "hidden",

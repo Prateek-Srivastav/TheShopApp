@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, TouchableOpacity } from "react-native";
 
-import Colors from "../../constants/Colors";
+import Card from "../UI/Card";
 import MainButton from "../UI/MainButton";
 import CartItem from "./CartItem";
+import Colors from "../../constants/Colors";
 
 const OrderItem = (props) => {
   const [showDetails, setShowDetails] = useState(false);
 
   return (
     <View>
-      <View
+      <Card
         style={
           showDetails
             ? styles.orderItemOpenDetail
@@ -27,18 +28,33 @@ const OrderItem = (props) => {
             setShowDetails((prevState) => !prevState);
           }}
         />
-      </View>
+      </Card>
       <View>
         {showDetails && (
           <View style={styles.detailContainer}>
-            <View style={styles.detailItems}>
+            <View style={styles.detail}>
               {props.items.map((cartItem) => (
-                <CartItem
-                  key={cartItem.productId}
-                  quantity={cartItem.quantity}
-                  title={cartItem.productTitle}
-                  amount={cartItem.sum}
-                />
+                <TouchableOpacity
+                  activeOpacity={0.5}
+                  onPress={() =>
+                    props.navigation.navigate("ProductDetail", {
+                      productId: cartItem.productId,
+                      productTitle: cartItem.productTitle,
+                    })
+                  }
+                >
+                  <CartItem
+                    key={cartItem.productId}
+                    quantity={cartItem.quantity}
+                    title={cartItem.productTitle}
+                    amount={cartItem.sum}
+                    style={{
+                      borderWidth: 0,
+                      marginHorizontal: 0,
+                    }}
+                    itemDataStyle={{ width: "80%" }}
+                  />
+                </TouchableOpacity>
               ))}
             </View>
           </View>
@@ -51,21 +67,15 @@ const OrderItem = (props) => {
 const styles = StyleSheet.create({
   orderItemOpenDetail: {
     padding: 10,
-    backgroundColor: "white",
     justifyContent: "space-between",
     margin: 20,
     marginBottom: -21,
-    borderRadius: 7,
-    elevation: 5,
   },
   orderItemClosedDetail: {
     padding: 10,
-    backgroundColor: "white",
     justifyContent: "space-between",
     margin: 20,
-    borderRadius: 7,
     marginBottom: 5,
-    elevation: 5,
   },
   summary: {
     flexDirection: "row",
@@ -87,15 +97,16 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     borderWidth: 1,
     borderRadius: 5,
-    marginHorizontal: 30,
+    marginHorizontal: 35,
     marginVertical: 10,
-    borderColor: "#888",
-    paddingTop: 20,
-    paddingBottom: 10,
+    borderColor: Colors.accent,
+    paddingTop: 10,
+    paddingBottom: 0,
+    elevation: 0,
   },
-  detailItems: {
+  detail: {
     width: "100%",
-    paddingHorizontal: 5,
+    marginHorizontal: 0,
   },
 });
 

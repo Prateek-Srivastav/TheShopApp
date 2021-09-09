@@ -13,7 +13,9 @@ import ProductsOverviewScreen from "../screens/shop/ProductsOverviewScreen";
 import ProductDetailScreen from "../screens/shop/ProductDetailScreen";
 import CartScreen from "../screens/shop/CartScreen";
 import OrdersScreen from "../screens/shop/OrdersScreen";
+import UserProductsScreen from "../screens/user/UserProductsScreen";
 import Colors from "../constants/Colors";
+import EditProductScreen from "../screens/user/EditProductScreen";
 
 defaultNavOptions = {
   ...TransitionPresets.SlideFromRightIOS,
@@ -44,6 +46,17 @@ const ProductsNavigator = createStackNavigator(
 const OrdersNavigator = createStackNavigator(
   {
     Orders: OrdersScreen,
+    ProductDetail: ProductDetailScreen,
+  },
+  {
+    defaultNavigationOptions: defaultNavOptions,
+  }
+);
+
+const AdminNavigator = createStackNavigator(
+  {
+    UserProducts: UserProductsScreen,
+    EditProduct: EditProductScreen,
   },
   {
     defaultNavigationOptions: defaultNavOptions,
@@ -70,6 +83,16 @@ const tabScreenConfig = {
       tabBarLabel: <Text></Text>,
     },
   },
+  Cart: {
+    screen: CartNavigator,
+    navigationOptions: {
+      tabBarIcon: (tabInfo) => {
+        return <Ionicons name="md-cart" size={25} color={tabInfo.tintColor} />;
+      },
+
+      tabBarLabel: <Text></Text>,
+    },
+  },
   Orders: {
     screen: OrdersNavigator,
     navigationOptions: {
@@ -79,11 +102,14 @@ const tabScreenConfig = {
       tabBarLabel: <Text></Text>,
     },
   },
-  Cart: {
-    screen: CartNavigator,
+
+  Admin: {
+    screen: AdminNavigator,
     navigationOptions: {
       tabBarIcon: (tabInfo) => {
-        return <Ionicons name="md-cart" size={25} color={tabInfo.tintColor} />;
+        return (
+          <Ionicons name="md-create" size={25} color={tabInfo.tintColor} />
+        );
       },
 
       tabBarLabel: <Text></Text>,

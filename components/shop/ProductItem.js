@@ -4,40 +4,42 @@ import {
   Text,
   Image,
   StyleSheet,
-  Button,
   TouchableNativeFeedback,
 } from "react-native";
-import MainButton from "../UI/MainButton";
+
+import Card from "../UI/Card";
+import Colors from "../../constants/Colors";
 
 const ProductItem = (props) => {
   return (
-    <TouchableNativeFeedback onPress={props.onViewDetail} useForeground>
-      <View style={styles.product}>
-        <Image style={styles.image} source={{ uri: props.image }} />
-        <View style={styles.details}>
-          <Text style={styles.title}>{props.title}</Text>
-          <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+    <Card style={styles.product}>
+      {/* <View style={styles.touchable}> */}
+      <TouchableNativeFeedback onPress={props.onSelect} useForeground>
+        <View>
+          <Image style={styles.image} source={{ uri: props.image }} />
+          <View style={styles.details}>
+            <Text style={styles.title}>{props.title}</Text>
+            <Text style={styles.price}>${props.price.toFixed(2)}</Text>
+          </View>
+          <View style={styles.actions}>{props.children}</View>
         </View>
-        <View style={styles.actions}>
-          <MainButton title="View Details" onPress={props.onViewDetail} />
-          <MainButton title="Add to Cart" onPress={props.onAddToCart} />
-        </View>
-      </View>
-    </TouchableNativeFeedback>
+      </TouchableNativeFeedback>
+      {/* </View> */}
+    </Card>
   );
 };
 
 const styles = StyleSheet.create({
   product: {
-    elevation: 3,
-    borderColor: "#ccc",
-    // borderWidth: 1,
-    borderRadius: 10,
-    backgroundColor: "white",
-    height: 300,
+    height: 292,
     margin: 20,
     overflow: "hidden",
   },
+  // touchable: {
+  //   // borderRadius: 10,
+  //   overflow: "hidden",
+  //   // margin: 20,
+  // },
   image: {
     width: "100%",
     height: "60%",
