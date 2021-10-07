@@ -7,14 +7,19 @@ export const deleteProduct = (productId) => {
 };
 
 export const createProduct = (title, description, imageUrl, price) => {
-  return {
-    type: CREATE_PRODUCT,
-    productData: {
-      title,
-      description,
-      imageUrl,
-      price,
-    },
+  return (dipatch) => {
+    //any async code you want!
+    fetch("https://theshopapp-304e1-default-rtdb.firebaseio.com/products.json");
+
+    dispatch({
+      type: CREATE_PRODUCT,
+      productData: {
+        title,
+        description,
+        imageUrl,
+        price,
+      },
+    });
   };
 };
 
