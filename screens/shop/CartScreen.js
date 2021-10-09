@@ -1,5 +1,11 @@
-import React from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import Colors from "../../constants/Colors";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -10,6 +16,8 @@ import * as cartActions from "../../store/actions/cart";
 import * as ordersActions from "../../store/actions/orders";
 
 const CartScreen = (props) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const cartTotalAmount = useSelector((state) => state.cart.totalAmount);
   const cartItems = useSelector((state) => {
     const transformedCartItems = [];
@@ -31,11 +39,17 @@ const CartScreen = (props) => {
 
   if (cartItems.length === 0) {
     return (
-      <View>
-        <Text>Your Cart is Empty. Add items.</Text>
+      <View style={styles.centered}>
+        <Text style={styles.emptyCart}>Your Cart is Empty. Add items.</Text>
       </View>
     );
   }
+
+  const sendOrderHandler = async () => {
+    setIsLoading(true);
+    await dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
+    setIsLoading(false);
+  };
 
   return (
     <View style={styles.screen}>
@@ -44,12 +58,11 @@ const CartScreen = (props) => {
           Total:{" "}
           <Text style={styles.amount}>${cartTotalAmount.toFixed(2)}</Text>
         </Text>
-        <MainButton
-          title="Order Now"
-          onPress={() => {
-            dispatch(ordersActions.addOrder(cartItems, cartTotalAmount));
-          }}
-        />
+        {isLoading ? (
+          <ActivityIndicator size="small" color={Colors.accent} />
+        ) : (
+          <MainButton title="Order Now" onPress={sendOrderHandler} />
+        )}
       </Card>
       <FlatList
         data={cartItems}
@@ -96,6 +109,19 @@ const styles = StyleSheet.create({
   amount: {
     color: "#888",
     fontSize: 18,
+  },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.primary,
+  },
+  emptyCart: {
+    fontFamily: "samsung-sharp-bold",
+    color: Colors.accent,
+    fontSize: 16,
+    textAlign: "center",
+    padding: 20,
   },
 });
 
