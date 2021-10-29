@@ -5,7 +5,7 @@ import {
   TransitionPresets,
 } from "react-navigation-stack";
 import { BottomTabBar, createBottomTabNavigator } from "react-navigation-tabs";
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { Ionicons } from "@expo/vector-icons";
 
 import CustomBottomBar from "../components/UI/CustomBottomBar";
@@ -14,8 +14,9 @@ import ProductDetailScreen from "../screens/shop/ProductDetailScreen";
 import CartScreen from "../screens/shop/CartScreen";
 import OrdersScreen from "../screens/shop/OrdersScreen";
 import UserProductsScreen from "../screens/user/UserProductsScreen";
-import Colors from "../constants/Colors";
+import AuthScreen from "../screens/user/AuthScreen";
 import EditProductScreen from "../screens/user/EditProductScreen";
+import Colors from "../constants/Colors";
 
 defaultNavOptions = {
   ...TransitionPresets.SlideFromRightIOS,
@@ -130,4 +131,18 @@ const ShopNavigator = createBottomTabNavigator(tabScreenConfig, {
   tabBarComponent: (props) => <CustomBottomBar {...props} />,
 });
 
-export default createAppContainer(ShopNavigator);
+const AuthNavigator = createStackNavigator(
+  {
+    Auth: AuthScreen,
+  },
+  {
+    defaultNavigationOptions: defaultNavOptions,
+  }
+);
+
+const MainNavigator = createSwitchNavigator({
+  Auth: AuthNavigator,
+  Shop: ShopNavigator,
+});
+
+export default createAppContainer(MainNavigator);
