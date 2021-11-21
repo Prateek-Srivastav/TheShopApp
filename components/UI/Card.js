@@ -11,10 +11,10 @@ const Card = (props) => {
 
 const styles = StyleSheet.create({
   card: {
-    elevation: 5,
+    elevation: 10,
     borderColor: "#ccc",
     borderRadius: 10,
-    backgroundColor: Colors.primary,
+    backgroundColor: Colors.cardBg,
   },
 });
 

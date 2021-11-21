@@ -40,7 +40,7 @@ const CartScreen = (props) => {
   if (cartItems.length === 0) {
     return (
       <View style={styles.centered}>
-        <Text style={styles.emptyCart}>Your Cart is Empty. Add items.</Text>
+        <Text style={styles.emptyCart}>Your Cart is Empty. Add items !</Text>
       </View>
     );
   }
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
   },
   emptyCart: {
     fontFamily: "samsung-sharp-bold",
-    color: Colors.accent,
+    color: Colors.text,
     fontSize: 16,
     textAlign: "center",
     padding: 20,

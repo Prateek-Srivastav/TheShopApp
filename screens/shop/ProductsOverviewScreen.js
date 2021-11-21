@@ -5,7 +5,6 @@ import {
   FlatList,
   StyleSheet,
   ActivityIndicator,
-  Button,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -13,14 +12,45 @@ import ProductItem from "../../components/shop/ProductItem";
 import MainButton from "../../components/UI/MainButton";
 import * as cartActions from "../../store/actions/cart";
 import * as productActions from "../../store/actions/products";
+import { toggleDarkMode } from "../../store/actions/darkMode";
 import Colors from "../../constants/Colors";
+import { darkMode } from "../../constants/Colors";
+import { HeaderButtons, Item } from "react-navigation-header-buttons";
+import CustomHeaderButton from "../../components/UI/HeaderButton";
 
 const ProductsOverviewScreen = (props) => {
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [error, setError] = useState();
   const products = useSelector((state) => state.products.availableProducts);
+
+  // const isDark = useSelector((state) => state.darkMode.isDarkMode);
+  // const Color = darkMode(isDark);
+  // console.log(Color);
   const dispatch = useDispatch();
+
+  // toggleDarkMode = () => {
+  //   if (isDarkMode) setIsDarkMode(false);
+  //   else setIsDarkMode(true);
+
+  //   console.log("Reached " + isDarkMode);
+  // };
+
+  const darkModeHandler = useCallback(async () => {
+    if (isDarkMode) setIsDarkMode(false);
+    else setIsDarkMode(true);
+    console.log("reached " + isDarkMode);
+    await dispatch(toggleDarkMode(isDarkMode));
+  }, [dispatch, isDarkMode]);
+
+  useEffect(() => {
+    props.navigation.setParams({
+      darkModeHandler: darkModeHandler,
+      isDark: isDarkMode,
+      toggleDarkColor: darkMode,
+    });
+  }, [darkModeHandler]);
 
   const loadProducts = useCallback(async () => {
     setError(null);
@@ -123,6 +153,21 @@ const ProductsOverviewScreen = (props) => {
 ProductsOverviewScreen.navigationOptions = (navData) => {
   return {
     headerTitle: "All Products",
+    headerRight: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item
+          title="Dark Mode"
+          iconName={
+            navData.navigation.getParam("isDark") ? "moon" : "moon-outline"
+          }
+          onPress={() => {
+            darkMode(navData.navigation.getParam("isDark"));
+            navData.navigation.getParam("darkModeHandler")();
+            // navData.navigation.getParam("toggleDarkColor");
+          }}
+        />
+      </HeaderButtons>
+    ),
   };
 };
 
@@ -135,7 +180,7 @@ const styles = StyleSheet.create({
   },
   errorMessage: {
     fontFamily: "samsung-sharp-bold",
-    color: Colors.accent,
+    color: Colors.cardBg,
     fontSize: 16,
     textAlign: "center",
     padding: 20,

@@ -18,7 +18,6 @@ import AuthScreen from "../screens/user/AuthScreen";
 import EditProductScreen from "../screens/user/EditProductScreen";
 import StartupScreen from "../screens/StartupScreen";
 import Colors from "../constants/Colors";
-import { useDispatch } from "react-redux";
 
 defaultNavOptions = {
   ...TransitionPresets.SlideFromRightIOS,
@@ -31,12 +30,12 @@ defaultNavOptions = {
     fontSize: 22,
   },
   headerTintColor: Colors.text,
-  headerLeft: () => {
-    null;
-  },
+  // headerLeft: () => {
+  //   null;
+  // },
 };
 
-const ProductsNavigator = createStackNavigator(
+export const ProductsNavigator = createStackNavigator(
   {
     ProductsOverview: ProductsOverviewScreen,
     ProductDetail: ProductDetailScreen,
@@ -124,8 +123,8 @@ const ShopNavigator = createBottomTabNavigator(tabScreenConfig, {
   tabBarOptions: {
     animationEnabled: true,
     activeTintColor: Colors.text,
-    inactiveTintColor: Colors.accent,
-
+    // inactiveTintColor: Colors.accent,
+    keyboardHidesTabBar: true,
     tabStyle: {
       paddingTop: 17,
     },

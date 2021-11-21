@@ -79,7 +79,6 @@ const UserProductsScreen = (props) => {
 };
 
 UserProductsScreen.navigationOptions = (navData) => {
-  console.log(navData);
   return {
     headerTitle: "Your Products",
     headerRight: () => (

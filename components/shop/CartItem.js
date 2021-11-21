@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     marginVertical: 5,
     borderWidth: 1,
-    borderColor: Colors.accent,
+    borderColor: Colors.text,
     borderRadius: 7,
     // width: "100%",
   },

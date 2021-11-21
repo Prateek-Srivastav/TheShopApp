@@ -4,6 +4,19 @@ import { BottomTabBar } from "react-navigation-tabs";
 import Colors from "../../constants/Colors";
 
 const CustomBottomBar = (props) => {
+  const [isVisible, setIsVisible] = useState(true);
+  componentDidMount = () => {
+    keyboardEventListeners = [
+      Keyboard.addListener("keyboardDidShow", setIsVisible(false)),
+      Keyboard.addListener("keyboardDidHide", setIsVisible(true)),
+    ];
+  };
+
+  componentWillUnmount = () => {
+    keyboardEventListeners &&
+      keyboardEventListeners.forEach((eventListener) => eventListener.remove());
+  };
+
   //We use the spread operator to pass down all default properties of a bottom bar
 
   //custom styles for our indicator
@@ -23,7 +36,7 @@ const CustomBottomBar = (props) => {
     elevation: 35,
     bottom: 50,
     width: width / 7,
-    backgroundColor: Colors.text,
+    backgroundColor: Colors.tabSlider,
     transform: position.getTranslateTransform(),
   };
 
@@ -39,40 +52,46 @@ const CustomBottomBar = (props) => {
     }).start();
   };
 
-  return (
-    <View>
-      <Animated.View style={animStyles} />
-      <BottomTabBar
-        {...props}
-        onTabPress={({ route }) => {
-          switch (route.key) {
-            case "Products":
-              //animated position should be 0
-              animate(0, route.key);
-              break;
-            case "Cart":
-              //animated position is width of screen minus width of single tab button
-              animate(width / 4, route.key);
-              break;
-            case "Orders":
-              //animated position is width/3
-              animate(width / 2, route.key);
-              break;
+  if (!isVisible) {
+    return null;
+  } else
+    return (
+      <View>
+        <Animated.View style={animStyles} />
+        <BottomTabBar
+          {...props}
+          onTabPress={({ route }) => {
+            switch (route.key) {
+              case "Products":
+                //animated position should be 0
+                animate(0, route.key);
+                break;
+              case "Cart":
+                //animated position is width of screen minus width of single tab button
+                animate(width / 4, route.key);
+                break;
+              case "Orders":
+                //animated position is width/3
+                animate(width / 2, route.key);
+                break;
 
-            case "Admin":
-              //animated position is width of screen minus width of single tab button
-              animate(width - width / 4, route.key);
-              break;
-          }
-        }}
-        style={{
-          backgroundColor: "transparent",
-          height: 55,
-          borderTopColor: "transparent",
-        }}
-      />
-    </View>
-  );
+              case "Admin":
+                //animated position is width of screen minus width of single tab button
+                animate(width - width / 4, route.key);
+                break;
+            }
+          }}
+          style={{
+            backgroundColor: Colors.primary,
+            height: 55,
+            borderTopColor: "transparent",
+          }}
+          tabBarOptions={{
+            keyboardHidesTabBar: true,
+          }}
+        />
+      </View>
+    );
 };
 
 export default CustomBottomBar;

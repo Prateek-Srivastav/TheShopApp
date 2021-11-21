@@ -127,7 +127,7 @@ const AuthScreen = (props) => {
           />
           <View style={styles.buttonContainer}>
             {isLoading ? (
-              <ActivityIndicator size="small" color={Colors.accent} />
+              <ActivityIndicator size="small" color={Colors.text} />
             ) : (
               <MainButton
                 title={isSignup ? "Sign Up" : "Login"}
@@ -168,6 +168,7 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     marginTop: 10,
+    marginHorizontal: 7,
   },
   gradient: {
     width: "100%",

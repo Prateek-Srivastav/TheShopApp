@@ -62,8 +62,10 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   description: {
-    fontSize: 14,
+    fontSize: 16,
     textAlign: "center",
+    color: Colors.text,
+    fontFamily: "product-sans-regular",
   },
   actions: {
     fontFamily: "product-sans-medium",

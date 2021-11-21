@@ -12,6 +12,7 @@ import productsReducer from "./store/reducers/products";
 import cartReducer from "./store/reducers/cart";
 import ordersReducer from "./store/reducers/orders";
 import authReducer from "./store/reducers/auth";
+import darkModeReducer from "./store/reducers/darkMode";
 import NavigationContainer from "./navigation/NavigationContainer";
 
 enableScreens();
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   cart: cartReducer,
   orders: ordersReducer,
   auth: authReducer,
+  darkMode: darkModeReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

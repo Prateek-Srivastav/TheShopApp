@@ -45,7 +45,7 @@ export const signup = (email, password) => {
 
     const token = resData.idToken;
 
-    const uploadResponse = await fetch(
+    await fetch(
       `https://theshopapp-304e1-default-rtdb.firebaseio.com/credentials.json?auth=${token}`,
       {
         method: "POST",

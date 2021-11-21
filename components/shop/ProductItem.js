@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginVertical: 2,
     fontFamily: "product-sans-black",
+    color: Colors.text,
   },
   price: {
     fontSize: 14,

@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
   },
   totalAmount: {
     fontFamily: "product-sans-black",
+    color: Colors.text,
     fontSize: 16,
   },
   date: {
@@ -99,7 +100,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginHorizontal: 35,
     marginVertical: 10,
-    borderColor: Colors.accent,
+    borderColor: Colors.text,
     paddingTop: 10,
     paddingBottom: 0,
     elevation: 0,

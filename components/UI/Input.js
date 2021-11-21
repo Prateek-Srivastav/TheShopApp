@@ -1,5 +1,6 @@
 import React, { useReducer, useEffect } from "react";
 import { View, Text, StyleSheet, TextInput } from "react-native";
+import Colors from "../../constants/Colors";
 
 const INPUT_CHANGE = "INPUT_CHANGE";
 const INPUT_BLUR = "INPUT_BLUR";
@@ -91,18 +92,25 @@ const styles = StyleSheet.create({
     marginTop: 10,
     flexDirection: "column",
     paddingHorizontal: 5,
+    marginVertical: 13,
   },
   label: {
     fontFamily: "product-sans-bold",
     marginVertical: 5,
-    fontSize: 15,
+    color: Colors.text,
+    fontSize: 16,
   },
   input: {
-    marginHorizontal: 2,
+    elevation: 10,
+    paddingHorizontal: 10,
     paddingVertical: 5,
-    borderBottomColor: "#ccc",
-    borderBottomWidth: 1,
-    backgroundColor: "white",
+    borderRadius: 6,
+    // borderBottomColor: ,
+    // borderBottomWidth: 1,
+    backgroundColor: Colors.cardBg,
+    color: Colors.text,
+    fontFamily: "product-sans-regular",
+    fontSize: 15,
   },
   errorContainer: {
     marginVertical: 5,

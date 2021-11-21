@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
     padding: 7,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: Colors.accent,
+    borderColor: "#ccc",
   },
   buttonText: {
-    color: Colors.text,
+    color: Colors.buttonColor,
     fontFamily: "product-sans-medium",
     fontSize: 15,
     textAlign: "center",
