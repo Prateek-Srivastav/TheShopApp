@@ -42,7 +42,22 @@ export const signup = (email, password) => {
     }
 
     const resData = await response.json();
-    console.log(resData);
+
+    const token = resData.idToken;
+
+    const uploadResponse = await fetch(
+      `https://theshopapp-304e1-default-rtdb.firebaseio.com/credentials.json?auth=${token}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      }
+    );
 
     dispatch(
       authenticate(
@@ -73,6 +88,23 @@ export const login = (email, password) => {
         }),
       }
     );
+    const resData = await response.json();
+
+    const token = resData.idToken;
+
+    const uploadResponse = await fetch(
+      `https://theshopapp-304e1-default-rtdb.firebaseio.com/credentials.json?auth=${token}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password,
+        }),
+      }
+    );
 
     if (!response.ok) {
       const errorResData = await response.json();
@@ -84,8 +116,6 @@ export const login = (email, password) => {
         message = "This password is not valid!";
       throw new Error(message);
     }
-    const resData = await response.json();
-    console.log(resData);
 
     dispatch(
       authenticate(
