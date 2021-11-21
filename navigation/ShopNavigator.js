@@ -16,7 +16,9 @@ import OrdersScreen from "../screens/shop/OrdersScreen";
 import UserProductsScreen from "../screens/user/UserProductsScreen";
 import AuthScreen from "../screens/user/AuthScreen";
 import EditProductScreen from "../screens/user/EditProductScreen";
+import StartupScreen from "../screens/StartupScreen";
 import Colors from "../constants/Colors";
+import { useDispatch } from "react-redux";
 
 defaultNavOptions = {
   ...TransitionPresets.SlideFromRightIOS,
@@ -136,11 +138,15 @@ const AuthNavigator = createStackNavigator(
     Auth: AuthScreen,
   },
   {
-    defaultNavigationOptions: defaultNavOptions,
+    headerMode: "none",
+    navigationOptions: {
+      headerVisible: false,
+    },
   }
 );
 
 const MainNavigator = createSwitchNavigator({
+  Startup: StartupScreen,
   Auth: AuthNavigator,
   Shop: ShopNavigator,
 });

@@ -1,17 +1,24 @@
 import React from "react";
-import { View, FlatList, StyleSheet, Alert } from "react-native";
+import { View, Text, FlatList, StyleSheet, Alert } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 
 import MainButton from "../../components/UI/MainButton";
 import ProductItem from "../../components/shop/ProductItem";
 import Colors from "../../constants/Colors";
 import * as productsActions from "../../store/actions/products";
+import * as authActions from "../../store/actions/auth";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/UI/HeaderButton";
 
 const UserProductsScreen = (props) => {
   const userProducts = useSelector((state) => state.products.userProducts);
   const dispatch = useDispatch();
+
+  leftHeaderAction = () => {
+    // const dispatch = useDispatch();
+    dispatch(authActions.logout());
+    props.navigation.navigate("Auth");
+  };
 
   const editProductHandler = (id) => {
     props.navigation.navigate("EditProduct", {
@@ -32,6 +39,14 @@ const UserProductsScreen = (props) => {
       },
     ]);
   };
+
+  if (userProducts.length === 0) {
+    return (
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>No products found. Start adding some!</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.screen}>
@@ -64,6 +79,7 @@ const UserProductsScreen = (props) => {
 };
 
 UserProductsScreen.navigationOptions = (navData) => {
+  console.log(navData);
   return {
     headerTitle: "Your Products",
     headerRight: () => (
@@ -77,6 +93,11 @@ UserProductsScreen.navigationOptions = (navData) => {
             });
           }}
         />
+      </HeaderButtons>
+    ),
+    headerLeft: () => (
+      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+        <Item title="Add" iconName="md-create" onPress={leftHeaderAction} />
       </HeaderButtons>
     ),
   };

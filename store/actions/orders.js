@@ -4,10 +4,12 @@ export const SET_ORDERS = "SET_ORDERS";
 import Order from "../../models/order";
 
 export const fetchOrders = () => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     try {
+      const userId = getState().auth.userId;
+
       const response = await fetch(
-        "https://theshopapp-304e1-default-rtdb.firebaseio.com/orders/u1.json"
+        `https://theshopapp-304e1-default-rtdb.firebaseio.com/orders/${userId}.json`
       );
 
       if (!response.ok) {
@@ -18,7 +20,7 @@ export const fetchOrders = () => {
       const loadedOrders = [];
 
       for (const key in resData)
-        loadedOrders.push(
+        loadedOrders.unshift(
           new Order(
             key,
             resData[key].cartItems,
@@ -34,10 +36,12 @@ export const fetchOrders = () => {
 };
 
 export const addOrder = (cartItems, totalAmount) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     const date = new Date();
+    const token = getState().auth.token;
+    const userId = getState().auth.userId;
     const response = await fetch(
-      "https://theshopapp-304e1-default-rtdb.firebaseio.com/orders/u1.json",
+      `https://theshopapp-304e1-default-rtdb.firebaseio.com/orders/${userId}.json?auth=${token}`,
       {
         method: "POST",
         headers: {
