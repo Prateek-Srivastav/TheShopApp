@@ -61,7 +61,12 @@ const CartScreen = (props) => {
         {isLoading ? (
           <ActivityIndicator size="small" color={Colors.accent} />
         ) : (
-          <MainButton title="Order Now" onPress={sendOrderHandler} />
+          <MainButton
+            title="Order Now"
+            // buttonStyle={{ backgroundColor: "#ccc" }}
+            style={{ color: "#02cfb0" }}
+            onPress={sendOrderHandler}
+          />
         )}
       </Card>
       <FlatList

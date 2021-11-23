@@ -6,7 +6,7 @@ const MainButton = (props) => {
   return (
     <View style={styles.buttonContainer}>
       <TouchableNativeFeedback onPress={props.onPress}>
-        <View style={styles.button}>
+        <View style={{ ...styles.button, ...props.buttonStyle }}>
           <Text style={{ ...styles.buttonText, ...props.style }}>
             {props.title}
           </Text>

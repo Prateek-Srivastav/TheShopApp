@@ -119,7 +119,18 @@ const EditProductScreen = (props) => {
   }, [dispatch, prodId, formState]);
 
   useEffect(() => {
-    props.navigation.setParams({ submit: submitHandler });
+    props.navigation.setOptions({
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+          <Item
+            title="Save"
+            iconName="md-checkmark"
+            onPress={submitHandler}
+            iconSize={24}
+          />
+        </HeaderButtons>
+      ),
+    });
   }, [submitHandler]);
 
   const inputChangeHandler = useCallback(
@@ -215,20 +226,9 @@ const EditProductScreen = (props) => {
 };
 
 export const screenOptions = (navData) => {
-  const submitFn = navData.route.params ? navData.route.params.submit : null;
   const title = navData.route.params ? navData.route.params.title : null;
   return {
     title: title,
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        <Item
-          title="Save"
-          iconName="md-checkmark"
-          onPress={submitFn}
-          iconSize={24}
-        />
-      </HeaderButtons>
-    ),
     headerLeft: () => {
       null;
     },
