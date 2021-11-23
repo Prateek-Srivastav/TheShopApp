@@ -18,10 +18,9 @@ export default (state = initialState, action) => {
         action.orderData.amount,
         action.orderData.date
       );
-
+      state.orders.unshift(newOrder);
       return {
         ...state,
-        orders: state.orders.concat(newOrder),
       };
   }
 

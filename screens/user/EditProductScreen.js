@@ -51,7 +51,7 @@ const EditProductScreen = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState();
 
-  const prodId = props.navigation.getParam("productId");
+  const prodId = props.route.params ? props.route.params.productId : null;
   const editedProduct = useSelector((state) =>
     state.products.userProducts.find((prod) => prod.id === prodId)
   );
@@ -143,11 +143,13 @@ const EditProductScreen = (props) => {
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1 }}
+      style={{ flex: 1, backgroundColor: Colors.primary, marginBottom: 50 }}
       behavior="padding"
       keyboardVerticalOffset={-10}
     >
-      <View style={{ flex: 1, backgroundColor: Colors.primary }}>
+      <View
+        style={{ flex: 1, backgroundColor: Colors.primary, marginBottom: 50 }}
+      >
         <ScrollView>
           <View style={styles.form}>
             <Input
@@ -212,18 +214,24 @@ const EditProductScreen = (props) => {
   );
 };
 
-EditProductScreen.navigationOptions = (navData) => {
+export const screenOptions = (navData) => {
+  const submitFn = navData.route.params ? navData.route.params.submit : null;
+  const title = navData.route.params ? navData.route.params.title : null;
   return {
-    headerTitle: navData.navigation.getParam("title"),
+    title: title,
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title="Save"
           iconName="md-checkmark"
-          onPress={() => navData.navigation.getParam("submit")()}
+          onPress={submitFn}
+          iconSize={24}
         />
       </HeaderButtons>
     ),
+    headerLeft: () => {
+      null;
+    },
   };
 };
 

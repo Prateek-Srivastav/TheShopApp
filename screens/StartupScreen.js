@@ -13,7 +13,8 @@ const StartupScreen = (props) => {
     const tryLogin = async () => {
       const userData = await AsyncStorage.getItem("userData");
       if (!userData) {
-        props.navigation.navigate("Auth");
+        // props.navigation.navigate("Auth");
+        dispatch(authActions.setDidTryAL());
         return;
       }
       const transformedData = JSON.parse(userData);
@@ -21,13 +22,14 @@ const StartupScreen = (props) => {
       const exipirationDate = new Date(expiryDate);
 
       if (exipirationDate <= new Date() || !token || !userId) {
-        props.navigation.navigate("Auth");
+        // props.navigation.navigate("Auth");
+        dispatch(authActions.setDidTryAL());
         return;
       }
 
       const expirationTime = exipirationDate.getTime() - new Date().getTime();
-
-      props.navigation.navigate("Shop");
+      console.log("navigationi failure");
+      // props.navigation.navigate("Shop");
       dispatch(authActions.authenticate(userId, token, expirationTime));
     };
 
@@ -36,7 +38,7 @@ const StartupScreen = (props) => {
 
   return (
     <View style={styles.screen}>
-      <ActivityIndicator size="large" color={Colors.accent} />
+      <ActivityIndicator size="large" color={Colors.text} />
     </View>
   );
 };

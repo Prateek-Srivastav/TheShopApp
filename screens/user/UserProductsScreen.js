@@ -10,6 +10,8 @@ import * as authActions from "../../store/actions/auth";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/UI/HeaderButton";
 
+let leftHeaderAction;
+
 const UserProductsScreen = (props) => {
   const userProducts = useSelector((state) => state.products.userProducts);
   const dispatch = useDispatch();
@@ -17,7 +19,7 @@ const UserProductsScreen = (props) => {
   leftHeaderAction = () => {
     // const dispatch = useDispatch();
     dispatch(authActions.logout());
-    props.navigation.navigate("Auth");
+    // props.navigation.navigate("Auth");
   };
 
   const editProductHandler = (id) => {
@@ -78,14 +80,15 @@ const UserProductsScreen = (props) => {
   );
 };
 
-UserProductsScreen.navigationOptions = (navData) => {
+export const screenOptions = (navData) => {
   return {
-    headerTitle: "Your Products",
+    title: "Your Products",
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title="Add"
           iconName="md-create"
+          iconSize={24}
           onPress={() => {
             navData.navigation.navigate("EditProduct", {
               title: "Add Product",
@@ -96,7 +99,12 @@ UserProductsScreen.navigationOptions = (navData) => {
     ),
     headerLeft: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        <Item title="Add" iconName="md-create" onPress={leftHeaderAction} />
+        <Item
+          title="Add"
+          iconName="log-in-outline"
+          onPress={leftHeaderAction}
+          iconSize={27}
+        />
       </HeaderButtons>
     ),
   };
@@ -106,6 +114,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: Colors.primary,
+    marginBottom: 50,
   },
 });
 

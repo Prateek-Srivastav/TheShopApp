@@ -83,14 +83,15 @@ const CartScreen = (props) => {
   );
 };
 
-CartScreen.navigationOptions = {
-  headerTitle: "Your Cart",
+export const screenOptions = {
+  title: "Your Cart",
 };
 
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: Colors.primary,
+    marginBottom: 50,
   },
   summary: {
     flexDirection: "row",

@@ -64,13 +64,10 @@ const ProductsOverviewScreen = (props) => {
   }, [setError, setIsLoading, dispatch]);
 
   useEffect(() => {
-    const willFocusSub = props.navigation.addListener(
-      "willFocus",
-      loadProducts
-    );
+    const unsubscribe = props.navigation.addListener("focus", loadProducts);
 
     return () => {
-      willFocusSub.remove();
+      unsubscribe();
     };
   }, [loadProducts]);
 
@@ -115,7 +112,9 @@ const ProductsOverviewScreen = (props) => {
     );
 
   return (
-    <View style={{ flex: 1, backgroundColor: Colors.primary }}>
+    <View
+      style={{ flex: 1, backgroundColor: Colors.primary, marginBottom: 50 }}
+    >
       <FlatList
         onRefresh={loadProducts}
         refreshing={isRefreshing}
@@ -150,20 +149,25 @@ const ProductsOverviewScreen = (props) => {
   );
 };
 
-ProductsOverviewScreen.navigationOptions = (navData) => {
+export const screenOptions = (navData) => {
   return {
-    headerTitle: "All Products",
+    title: "All Products",
     headerRight: () => (
       <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
         <Item
           title="Dark Mode"
           iconName={
-            navData.navigation.getParam("isDark") ? "moon" : "moon-outline"
+            (navData.route.params ? navData.route.params.isDark : null)
+              ? "moon"
+              : "moon-outline"
           }
+          iconSize={21}
           onPress={() => {
-            darkMode(navData.navigation.getParam("isDark"));
-            navData.navigation.getParam("darkModeHandler")();
-            // navData.navigation.getParam("toggleDarkColor");
+            darkMode(navData.route.params ? navData.route.params.isDark : null);
+            navData.route.params
+              ? navData.route.params.darkModeHandler()
+              : null;
+            // navData.route.params? navData.route.params.toggleDarkColor");
           }}
         />
       </HeaderButtons>

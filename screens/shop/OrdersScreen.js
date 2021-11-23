@@ -41,7 +41,9 @@ const OrdersScreen = (props) => {
   }
 
   return (
-    <View style={{ flex: 1, backgroundColor: Colors.primary }}>
+    <View
+      style={{ flex: 1, backgroundColor: Colors.primary, marginBottom: 50 }}
+    >
       <FlatList
         data={orders}
         renderItem={(itemData) => (
@@ -58,8 +60,8 @@ const OrdersScreen = (props) => {
   );
 };
 
-OrdersScreen.navigationOptions = {
-  headerTitle: "Your Orders",
+export const screenOptions = {
+  title: "Your Orders",
 };
 
 const styles = StyleSheet.create({

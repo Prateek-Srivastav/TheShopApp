@@ -5,17 +5,6 @@ import Colors from "../../constants/Colors";
 
 const CustomBottomBar = (props) => {
   const [isVisible, setIsVisible] = useState(true);
-  componentDidMount = () => {
-    keyboardEventListeners = [
-      Keyboard.addListener("keyboardDidShow", setIsVisible(false)),
-      Keyboard.addListener("keyboardDidHide", setIsVisible(true)),
-    ];
-  };
-
-  componentWillUnmount = () => {
-    keyboardEventListeners &&
-      keyboardEventListeners.forEach((eventListener) => eventListener.remove());
-  };
 
   //We use the spread operator to pass down all default properties of a bottom bar
 
