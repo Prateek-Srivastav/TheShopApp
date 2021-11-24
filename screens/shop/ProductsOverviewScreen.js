@@ -36,19 +36,19 @@ const ProductsOverviewScreen = (props) => {
   //   console.log("Reached " + isDarkMode);
   // };
 
-  const darkModeHandler = useCallback(async () => {
-    if (isDarkMode) setIsDarkMode(false);
-    else setIsDarkMode(true);
-    console.log("reached " + isDarkMode);
-    await dispatch(toggleDarkMode(isDarkMode));
-  }, [dispatch, isDarkMode]);
+  // const darkModeHandler = useCallback(async () => {
+  //   if (isDarkMode) setIsDarkMode(false);
+  //   else setIsDarkMode(true);
+  //   console.log("reached " + isDarkMode);
+  //   await dispatch(toggleDarkMode(isDarkMode));
+  // }, [dispatch, isDarkMode]);
 
-  useEffect(() => {
-    props.navigation.setParams({
-      darkModeHandler: darkModeHandler,
-      isDark: isDarkMode,
-    });
-  }, [darkModeHandler]);
+  // useEffect(() => {
+  //   props.navigation.setParams({
+  //     darkModeHandler: darkModeHandler,
+  //     isDark: isDarkMode,
+  //   });
+  // }, [darkModeHandler]);
 
   const loadProducts = useCallback(async () => {
     setError(null);
@@ -150,25 +150,25 @@ const ProductsOverviewScreen = (props) => {
 export const screenOptions = (navData) => {
   return {
     title: "All Products",
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
-        <Item
-          title="Dark Mode"
-          iconName={
-            (navData.route.params ? navData.route.params.isDark : null)
-              ? "moon"
-              : "moon-outline"
-          }
-          iconSize={21}
-          onPress={() => {
-            appTheme(navData.route.params ? navData.route.params.isDark : null);
-            navData.route.params
-              ? navData.route.params.darkModeHandler()
-              : null;
-          }}
-        />
-      </HeaderButtons>
-    ),
+    // headerRight: () => (
+    //   <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+    //     <Item
+    //       title="Dark Mode"
+    //       iconName={
+    //         (navData.route.params ? navData.route.params.isDark : null)
+    //           ? "moon"
+    //           : "moon-outline"
+    //       }
+    //       iconSize={21}
+    //       onPress={() => {
+    //         appTheme(navData.route.params ? navData.route.params.isDark : null);
+    //         navData.route.params
+    //           ? navData.route.params.darkModeHandler()
+    //           : null;
+    //       }}
+    //     />
+    //   </HeaderButtons>
+    // ),
   };
 };
 
