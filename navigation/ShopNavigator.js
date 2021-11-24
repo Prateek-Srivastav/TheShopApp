@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { Text, View, Animated, Dimensions } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { TransitionPresets } from "@react-navigation/stack";
+// import { createStackNavigator } from "@react-navigation/native-stack";
+import {
+  TransitionPresets,
+  CardStyleInterpolators,
+  createStackNavigator,
+} from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -32,10 +36,10 @@ import StartupScreen from "../screens/StartupScreen";
 import Colors from "../constants/Colors";
 
 let defaultNavOptions = {
-  // AnimationEnabled: true,
-  // ...TransitionPresets.SlideFromRightIOS,
+  ...TransitionPresets.SlideFromRightIOS,
   headerStyle: {
     backgroundColor: Colors.primary,
+    elevation: 0,
   },
   headerTitleAlign: "center",
   headerTitleStyle: {
@@ -43,13 +47,12 @@ let defaultNavOptions = {
     fontSize: 22,
   },
   headerTintColor: Colors.text,
-  headerBackVisible: false,
-  gestureEnabled: true,
-  ...TransitionPresets.ModalPresentationIOS,
-  // headerLeft: null,
+  // headerMode: "float",
+  // headerBackVisible: false,
+  headerLeft: null,
 };
 
-const ProductsStackNavigator = createNativeStackNavigator();
+const ProductsStackNavigator = createStackNavigator();
 
 export const ProductsNavigator = () => {
   return (
@@ -79,7 +82,7 @@ export const ProductsNavigator = () => {
 //   }
 // );
 
-const OrdersStackNavigator = createNativeStackNavigator();
+const OrdersStackNavigator = createStackNavigator();
 
 export const OrdersNavigator = () => {
   return (
@@ -108,7 +111,7 @@ export const OrdersNavigator = () => {
 //   }
 // );
 
-const AdminStackNavigator = createNativeStackNavigator();
+const AdminStackNavigator = createStackNavigator();
 
 export const AdminNavigator = () => {
   return (
@@ -137,7 +140,7 @@ export const AdminNavigator = () => {
 //   }
 // );
 
-const CartStackNavigator = createNativeStackNavigator();
+const CartStackNavigator = createStackNavigator();
 
 export const CartNavigator = () => {
   return (
@@ -160,7 +163,7 @@ export const CartNavigator = () => {
 //   }
 // );
 
-const AuthStackNavigator = createNativeStackNavigator();
+const AuthStackNavigator = createStackNavigator();
 
 export const AuthNavigator = () => {
   return (

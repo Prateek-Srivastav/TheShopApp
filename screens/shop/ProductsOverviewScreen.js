@@ -14,7 +14,7 @@ import * as cartActions from "../../store/actions/cart";
 import * as productActions from "../../store/actions/products";
 import { toggleDarkMode } from "../../store/actions/darkMode";
 import Colors from "../../constants/Colors";
-import { darkMode } from "../../constants/Colors";
+import { appTheme } from "../../constants/Colors";
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 import CustomHeaderButton from "../../components/UI/HeaderButton";
 
@@ -25,7 +25,6 @@ const ProductsOverviewScreen = (props) => {
   const [error, setError] = useState();
   const products = useSelector((state) => state.products.availableProducts);
 
-  // const isDark = useSelector((state) => state.darkMode.isDarkMode);
   // const Color = darkMode(isDark);
   // console.log(Color);
   const dispatch = useDispatch();
@@ -48,7 +47,6 @@ const ProductsOverviewScreen = (props) => {
     props.navigation.setParams({
       darkModeHandler: darkModeHandler,
       isDark: isDarkMode,
-      toggleDarkColor: darkMode,
     });
   }, [darkModeHandler]);
 
@@ -163,11 +161,10 @@ export const screenOptions = (navData) => {
           }
           iconSize={21}
           onPress={() => {
-            darkMode(navData.route.params ? navData.route.params.isDark : null);
+            appTheme(navData.route.params ? navData.route.params.isDark : null);
             navData.route.params
               ? navData.route.params.darkModeHandler()
               : null;
-            // navData.route.params? navData.route.params.toggleDarkColor");
           }}
         />
       </HeaderButtons>

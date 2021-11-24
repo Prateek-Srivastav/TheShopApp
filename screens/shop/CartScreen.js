@@ -63,7 +63,7 @@ const CartScreen = (props) => {
         ) : (
           <MainButton
             title="Order Now"
-            // buttonStyle={{ backgroundColor: "#ccc" }}
+            buttonStyle={{ borderColor: "green" }}
             style={{ color: "#02cfb0" }}
             onPress={sendOrderHandler}
           />
