@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   input: {
-    elevation: 10,
+    elevation: 5,
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 6,
