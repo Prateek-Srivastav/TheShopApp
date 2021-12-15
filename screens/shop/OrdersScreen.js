@@ -34,8 +34,10 @@ const OrdersScreen = (props) => {
 
   if (orders.length === 0) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>No orders found. Start ordering some!</Text>
+      <View style={styles.centered}>
+        <Text style={styles.emptyOrder}>
+          No orders found. Start ordering some!
+        </Text>
       </View>
     );
   }
@@ -70,6 +72,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primary,
     justifyContent: "center",
     alignItems: "center",
+  },
+  emptyOrder: {
+    fontFamily: "samsung-sharp-bold",
+    color: Colors.text,
+    fontSize: 16,
+    textAlign: "center",
+    padding: 20,
   },
 });
 

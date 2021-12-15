@@ -44,8 +44,10 @@ const UserProductsScreen = (props) => {
 
   if (userProducts.length === 0) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>No products found. Start adding some!</Text>
+      <View style={styles.centered}>
+        <Text style={styles.emptyUserProducts}>
+          No products found. Start adding some!
+        </Text>
       </View>
     );
   }
@@ -71,7 +73,7 @@ const UserProductsScreen = (props) => {
             />
             <MainButton
               title="Delete"
-              onPress={deleteHandler.bind(this, itemData.item.id)}
+              onPress={() => deleteHandler(itemData.item.id)}
             />
           </ProductItem>
         )}
@@ -115,6 +117,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.primary,
     marginBottom: 50,
+  },
+  centered: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.primary,
+  },
+  emptyUserProducts: {
+    fontFamily: "samsung-sharp-bold",
+    color: Colors.text,
+    fontSize: 16,
+    textAlign: "center",
+    padding: 20,
   },
 });
 

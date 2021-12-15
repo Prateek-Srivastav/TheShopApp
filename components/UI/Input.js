@@ -53,6 +53,7 @@ const Input = React.forwardRef((props, ref) => {
     }
 
     dispatch({ type: INPUT_CHANGE, value: text, isValid: isValid });
+    dispatch({ type: INPUT_BLUR });
   };
 
   useEffect(() => {
@@ -60,10 +61,6 @@ const Input = React.forwardRef((props, ref) => {
       onInputChange(id, inputState.value, inputState.isValid);
     }
   }, [inputState, onInputChange, id]);
-
-  const lostFocusHandler = () => {
-    dispatch({ type: INPUT_BLUR });
-  };
 
   return (
     <View style={styles.formControl}>
@@ -74,7 +71,7 @@ const Input = React.forwardRef((props, ref) => {
         style={styles.input}
         value={inputState.value}
         onChangeText={textChangeHandler}
-        onBlur={lostFocusHandler}
+        // onBlur={lostFocusHandler}
         ref={ref}
       />
       {!inputState.isValid && inputState.touched && (
